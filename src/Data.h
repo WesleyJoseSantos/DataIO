@@ -72,9 +72,9 @@ struct DataOut
 
 struct DataIn
 {
+  int BlinkTimer;
   bool EnableBlink;
   bool ManualCmd;
-  int BlinkTimer;
 };
 
 #endif //!__DATA__H__

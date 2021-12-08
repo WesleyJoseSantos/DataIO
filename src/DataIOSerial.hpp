@@ -26,31 +26,32 @@ private:
             int id = port->read();
 
             if(id == 255){
-                for (int i = 0; i < dataOut.size; i++)
+                for (int i = 0; i < dataLink.size; i++)
                 {
-                    dataOut.items[i].reset();
+                    dataLink.items[i].reset();
                 }
                 return;
             }
 
-            int size = dataIn.items[id].size;
-            uint8_t *ptr = (uint8_t*)dataIn.items[id].ptr;
-            port->readBytes(ptr, size);            
+            int size = dataLink.items[id].size;
+            uint8_t *ptr = (uint8_t*)dataLink.items[id].ptr;
+            port->readBytes(ptr, size);      
+            dataLink.items[id].isChanged();      
         }
     }
 
     void dataOutTask(){
-        if(dataOut.items[idx].isChanged()){
-            uint8_t *ptr = (uint8_t*)dataOut.items[idx].ptr;
+        if(dataLink.items[idx].isChanged()){
+            uint8_t *ptr = (uint8_t*)dataLink.items[idx].ptr;
             port->write(idx);
-            for (size_t i = 0; i < dataOut.items[idx].size; i++)
+            for (size_t i = 0; i < dataLink.items[idx].size; i++)
             {
                 port->write(*ptr);
                 ptr++;
             }
         }
         idx++;
-        if(idx >= dataOut.size){
+        if(idx >= dataLink.size){
             idx = 0;
         }
     }

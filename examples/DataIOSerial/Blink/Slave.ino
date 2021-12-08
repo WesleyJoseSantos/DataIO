@@ -12,7 +12,7 @@ void setup()
     Serial.begin(74400);
     sserial.begin(9600);
     dataIO.setPort(sserial);
-    dataIO.addLink(data, DATA_IN);
+    dataIO.addLink(data);
     pinMode(LED_BUILTIN, OUTPUT);
 }
 

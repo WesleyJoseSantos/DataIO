@@ -10,7 +10,7 @@ void setup()
 {
     Serial.begin(74400);
     dataIO.setPort(Serial);
-    dataIO.addLink(data, DATA_OUT);
+    dataIO.addLink(data);
     pinMode(LED_BUILTIN, OUTPUT);
 
     data.Ip = IpAddress(192, 168, 0, 10);

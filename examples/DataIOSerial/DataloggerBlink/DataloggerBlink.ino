@@ -13,10 +13,10 @@ void setup()
 {
     Serial.begin(74400);
     dataIO.setPort(Serial);
-    dataIO.addLink(ip, DATA_OUT);
-    dataIO.addLink(mac, DATA_OUT);
-    dataIO.addLink(dataOut, DATA_OUT);
-    dataIO.addLink(dataIn, DATA_IN);
+    dataIO.addLink(ip);
+    dataIO.addLink(mac);
+    dataIO.addLink(dataOut);
+    dataIO.addLink(dataIn);
     pinMode(LED_BUILTIN, OUTPUT);
 
     ip = IpAddress(192, 168, 1, 10);

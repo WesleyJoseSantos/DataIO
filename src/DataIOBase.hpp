@@ -18,25 +18,14 @@ class DataIOBase
 private:
     
 protected:
-    DataLink dataIn;
-    DataLink dataOut;
+    DataLink dataLink;
 public:
     DataIOBase() {}
     ~DataIOBase() {}
 
     template <typename T>
-    void addLink(T &it, DataLinkDirection direction){
-        switch (direction)
-        {
-        case DataLinkDirection::DATA_IN:
-            dataIn.addLink(it);
-            break;
-        case DataLinkDirection::DATA_OUT:
-            dataOut.addLink(it);
-            break;
-        default:
-            break;
-        }
+    void addLink(T &it){
+        dataLink.addLink(it);
     }
 
     virtual void task() = 0;

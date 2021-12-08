@@ -12,7 +12,6 @@
 #pragma once
 
 #include "DataLinkItem.hpp"
-#include "DataLinkDirection.h"
 
 #define DATA_LINK_SIZE 10
 

@@ -5,6 +5,7 @@
         "ostream": "cpp",
         "sstream": "cpp",
         "array": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "initializer_list": "cpp"
     }
 }
