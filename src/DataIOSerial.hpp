@@ -18,7 +18,6 @@ class DataIOSerial  :public DataIOBase
 {
 private:
     Stream *port;
-    uint8_t idx;
     bool started;
 
     void dataInTask(){
@@ -41,18 +40,17 @@ private:
     }
 
     void dataOutTask(){
-        if(dataLink.items[idx].isChanged()){
-            uint8_t *ptr = (uint8_t*)dataLink.items[idx].ptr;
-            port->write(idx);
-            for (size_t i = 0; i < dataLink.items[idx].size; i++)
-            {
-                port->write(*ptr);
-                ptr++;
+        for (int i = 0; i < dataLink.size; i++)
+        {
+            if(dataLink.items[i].isChanged()){
+                uint8_t *ptr = (uint8_t*)dataLink.items[i].ptr;
+                port->write(i);
+                for (size_t j = 0; j < dataLink.items[i].size; j++)
+                {
+                    port->write(*ptr);
+                    ptr++;
+                }
             }
-        }
-        idx++;
-        if(idx >= dataLink.size){
-            idx = 0;
         }
     }
 
