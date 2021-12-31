@@ -30,3 +30,21 @@ public:
 
     virtual void task() = 0;
 };
+
+class StaticDataIOBase
+{
+protected:
+    static DataLink dataLink;
+public:
+    StaticDataIOBase() {}
+    ~StaticDataIOBase() {}
+
+    template <typename T>
+    void addLink(T &it){
+        dataLink.addLink(it);
+    }
+
+    virtual void task() = 0;
+};
+
+DataLink StaticDataIOBase::dataLink;

@@ -14,7 +14,7 @@
 #include "DataIOBase.hpp"
 #include "Stream.h"
 
-class DataIOSerial  :public DataIOBase
+class DataIOSerial : public DataIOBase
 {
 private:
     Stream *port;
@@ -62,7 +62,7 @@ public:
         this->port = &port;
     }
 
-    void task(){
+    void task() override {
         if(started){
             dataInTask();
             dataOutTask();

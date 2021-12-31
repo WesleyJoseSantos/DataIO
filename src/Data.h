@@ -13,66 +13,65 @@
 #define __DATA__H__
 
 #include <inttypes.h>
-#include <WString.h>
 
-class IpAddress
+class DataIp
 {
 private:
 public:
-  uint8_t B1;
-  uint8_t B2;
-  uint8_t B3;
-  uint8_t B4;
+  uint8_t byte1;
+  uint8_t byte2;
+  uint8_t byte3;
+  uint8_t byte4;
 
-  IpAddress() {}
+  DataIp() {}
 
-  IpAddress(uint8_t B1, uint8_t B2, uint8_t B3, uint8_t B4)
+  DataIp(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4)
   {
-    this->B1 = B1;
-    this->B2 = B2;
-    this->B3 = B3;
-    this->B4 = B4;
+    this->byte1 = byte1;
+    this->byte2 = byte2;
+    this->byte3 = byte3;
+    this->byte4 = byte4;
   }
 };
 
-class MacAddress
+class DataMac
 {
 private:
 public:
-  uint8_t B1;
-  uint8_t B2;
-  uint8_t B3;
-  uint8_t B4;
-  uint8_t B5;
-  uint8_t B6;
+  uint8_t byte1;
+  uint8_t byte2;
+  uint8_t byte3;
+  uint8_t byte4;
+  uint8_t byte5;
+  uint8_t byte6;
 
-  MacAddress() {}
+  DataMac() {}
 
-  MacAddress(uint8_t B1, uint8_t B2, uint8_t B3, uint8_t B4, uint8_t B5, uint8_t B6)
+  DataMac(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4, uint8_t byte5, uint8_t byte6)
   {
-    this->B1 = B1;
-    this->B2 = B2;
-    this->B3 = B3;
-    this->B4 = B4;
-    this->B5 = B5;
-    this->B6 = B6;
+    this->byte1 = byte1;
+    this->byte2 = byte2;
+    this->byte3 = byte3;
+    this->byte4 = byte4;
+    this->byte5 = byte5;
+    this->byte6 = byte6;
   }
 };
 
 struct DataOut
 {
-  unsigned long Timer;
+  uint32_t Timer;
   bool LedStatus;
   bool Bool;
-  int Int;
-  int BlinkCount;
+  int16_t Int;
+  int16_t BlinkCount;
   float Float;
   double Double;
 };
 
 struct DataIn
 {
-  int BlinkTimer;
+  int16_t BlinkTimer;
   bool EnableBlink;
   bool ManualCmd;
 };

@@ -1,26 +1,42 @@
 #include "Data.h"
 #include <Arduino.h>
-#include <DataIOSerial.hpp>
+#include <DataIOWebSockets.hpp>
 #include <ESP8266WiFi.h>
 
-IpAddress ip;
-MacAddress mac;
+#define SSID "DataIO WS Server"
+#define PASS "dataiowspass" 
+
+DataIp dataIp;
+DataMac dataMac;
 DataIn dataIn;
 DataOut dataOut;
-DataIOSerial dataIO;
+DataIOWebSockets dataIO;
 
 void setup()
 {
     Serial.begin(74400);
-    dataIO.setPort(Serial);
-    dataIO.addLink(ip);
-    dataIO.addLink(mac);
+    WiFi.softAP(SSID, PASS);
+
+    while (WiFi.status() == WL_CONNECTED)
+    {
+        Serial.println("Waiting for connection...");
+        delay(1000);
+    }
+
+    dataIO.begin();
+    dataIO.addLink(dataIp);
+    dataIO.addLink(dataMac);
     dataIO.addLink(dataOut);
     dataIO.addLink(dataIn);
+
     pinMode(LED_BUILTIN, OUTPUT);
 
-    ip = IpAddress(192, 168, 1, 10);
-    mac = MacAddress(0x00, 0x00, 0x5e, 0x00, 0x53, 0xaf);
+    IPAddress ip = WiFi.localIP();
+    uint8_t mac[6];
+    WiFi.macAddress(mac);
+
+    dataIp = DataIp(ip[0], ip[1], ip[2], ip[3]);
+    dataMac = DataMac(mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
 
     dataIn.BlinkTimer = 1000;
 }
@@ -49,6 +65,6 @@ void loop()
     }
 
     if(dataIn.BlinkTimer < 100) dataIn.BlinkTimer = 100;
-
-    delay(50);
+    
+    delay(500);
 }

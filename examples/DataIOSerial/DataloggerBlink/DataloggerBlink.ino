@@ -41,7 +41,7 @@ void loop()
         if (millis() > blinkTimer)
         {
             digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-            dataOut.BlinkCount++;
+            if(digitalRead(LED_BUILTIN)) dataOut.BlinkCount++;
             blinkTimer = millis() + dataIn.BlinkTimer;
         }
     }else{
@@ -50,5 +50,5 @@ void loop()
 
     if(dataIn.BlinkTimer < 100) dataIn.BlinkTimer = 100;
 
-    delay(50);
+    delay(500);
 }
